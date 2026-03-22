@@ -167,7 +167,6 @@ try{
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Erro ao atualizar tabela: " + e.getMessage());
     }
-    }  
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
