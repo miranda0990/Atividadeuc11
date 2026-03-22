@@ -24,7 +24,20 @@ public class ProdutosDAO {
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
     public int cadastrarProduto (ProdutosDTO produto){
-        
+        int status;
+        try{
+            prep = conn.prepareStatement("INSERT INTO funcionarios VALUES (?,?,?,?)");
+            
+            prep.setString(1, produto.getNome());
+            prep.setInt(2, produto.getValor());
+            status = prep.executeUpdate();
+            
+            return status;
+        }catch(SQLException ex){
+            System.out.println("Erro ao conectar" + ex.getMessage());
+                return ex.getErrorCode();
+        }
+
       
         
     }
