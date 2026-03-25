@@ -137,36 +137,25 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        String id = id_produto_venda.getText();
+        int row = listaProdutos.getSelectedRow();
+    
+    if (row >= 0) {
+        String idStr = listaProdutos.getValueAt(row, 0).toString();
+        int id = Integer.parseInt(idStr);
         
-        ProdutosDAO produtosdao = new ProdutosDAO();
+        ProdutosDAO dao = new ProdutosDAO();
+        dao.venderProduto(id);
         
-        //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
+        // Atualiza a tabela após a venda
+        listarProdutos(); 
+    } else {
+        JOptionPane.showMessageDialog(null, "Selecione um produto na tabela primeiro!");
+    }
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-       ProdutosDAO produtosdao = new ProdutosDAO();
-try{
-        // Pega o modelo da tabela que você desenhou no NetBeans
-        DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
-        model.setNumRows(0); // Limpa a tabela para não duplicar itens
-
-        // Recebe a lista do DAO
-        ArrayList<ProdutosDTO> lista = produtosdao.listarProdutos();
-
-        // Varre a lista e adiciona cada linha na JTable
-        for (int i = 0; i < lista.size(); i++) {
-            model.addRow(new Object[]{
-                lista.get(i).getId(),
-                lista.get(i).getNome(),
-                lista.get(i).getValor(),
-                lista.get(i).getStatus()
-            });
-        }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Erro ao atualizar tabela: " + e.getMessage());
-    }
+       VendasVIEW v = new VendasVIEW();
+       v.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
